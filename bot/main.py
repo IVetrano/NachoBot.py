@@ -18,7 +18,7 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
 	for channel in member.server.channels:
-	await client.send_message(f"Bienvenido a la Virgocueva {member.mention} ")
+		await client.send_message(f"Bienvenido a la Virgocueva {member.mention} ")
 #------------------------------------------------------------------------------
 
 #----------------------------------------------------------------Con un mensaje
