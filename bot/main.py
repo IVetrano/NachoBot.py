@@ -133,10 +133,10 @@ async def on_message(message):
         
         
       if comando == "repetirenrojo":
-			if random.choice([True, False]):
-				await message.channel.send("```diff\n-" + argumento + "\n```")
-			else:
-				await message.channel.send("```\nME NIEGO!!!\n```")
+	    if random.choice([True, False]):
+	      await message.channel.send("```diff\n-" + argumento + "\n```")
+	    else:
+	      await message.channel.send("```\nME NIEGO!!!\n```")
       
       if comando == "anime":
         await message.channel.send("https://cdn.glitch.com/6353980a-f25a-4fd8-ab49-da62c9504e1d%2F2962cbec-5cdd-47ec-98de-0bf666b698fc_animeee3.png?v=1601669375160")
