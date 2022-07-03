@@ -133,7 +133,7 @@ async def on_message(message):
 		if comando == "RepetirRojo":
 			if random.choice([True, False]):
 				await message.channel.send(content = "https://imgur.com/4KmbqP5")
-				await message.channel.send(content = message.author.mention + " No te lo vas a creer, pero" + "```diff\n-" + argumento[1:] + "\n```" + "hihihihihihihihihihihyahyahyahhahhah!")
+				await message.channel.send(content = message.author.mention + " No te lo vas a creer, pero" + "```diff\n-" + argumento[1:] + " hihihihihihihihihihihyahyahyahhahhah!" + "\n```")
 			else:
 				await message.channel.send(content = "https://imgur.com/nvEnsbE")
 				await message.channel.send(content = message.author.mention + " ME NIEGO!!! ya verás el por qué\n" + "hihihihihihihihihihihyahyahyahhahhah!")
