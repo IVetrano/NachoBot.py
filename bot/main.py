@@ -132,9 +132,11 @@ async def on_message(message):
 			
 		if comando == "RepetirRojo":
 			if random.choice([True, False]):
-				await message.channel.send(content = "https://imgur.com/4KmbqP5\n" + message.author.mention + " No te lo vas a creer, pero" + "```diff\n-" + argumento[1:] + "\n```" + "hihihihihihihihihihihyahyahyahhahhah!")
+				await message.channel.send(content = "https://imgur.com/4KmbqP5")
+				await message.channel.send(content = message.author.mention + " No te lo vas a creer, pero" + "```diff\n-" + argumento[1:] + "\n```" + "hihihihihihihihihihihyahyahyahhahhah!")
 			else:
-				await message.channel.send(content = "https://imgur.com/nvEnsbE\n" + message.author.mention + " ME NIEGO!!! ya verás el por qué\n" + "hihihihihihihihihihihyahyahyahhahhah!")
+				await message.channel.send(content = "https://imgur.com/nvEnsbE")
+				await message.channel.send(content = message.author.mention + " ME NIEGO!!! ya verás el por qué\n" + "hihihihihihihihihihihyahyahyahhahhah!")
 		
 		if comando == "anime":
 			await message.channel.send("https://cdn.glitch.com/6353980a-f25a-4fd8-ab49-da62c9504e1d%2F2962cbec-5cdd-47ec-98de-0bf666b698fc_animeee3.png?v=1601669375160")
