@@ -195,9 +195,11 @@ async def on_message(message):
 
 def str_a_leet(string):
 	string = string.upper()
+	string = list(string)
 	reemplazo = {"A": "4", "I": "1", "E": "3", "S": "5", "G": "6", "T": "7", "B": "8", "O": "0"}
 	for i in range(len(string)):
 		string[i] = reemplazo.get(string[i], string[i])
+	string = "".join(string)
 	return string
 
 
