@@ -138,6 +138,9 @@ async def on_message(message):
 				await message.channel.send(content = "https://imgur.com/nvEnsbE")
 				await message.channel.send(content = message.author.mention + " ME NIEGO!!! ya verás el por qué\n" + "hihihihihihihihihihihyahyahyahhahhah!")
 		
+		if comando == "RepetirLeet":
+			await message.channel.send(content = message.author.mention + str_a_leet(argumento))
+
 		if comando == "anime":
 			await message.channel.send("https://cdn.glitch.com/6353980a-f25a-4fd8-ab49-da62c9504e1d%2F2962cbec-5cdd-47ec-98de-0bf666b698fc_animeee3.png?v=1601669375160")
 		
@@ -189,5 +192,13 @@ async def on_message(message):
 		
 #timer = threading.Thread(target=hola)
 #timer.start()
+
+def str_a_leet(string):
+	string = string.upper()
+	reemplazo = {"A": "4", "I": "1", "E": "3", "S": "5", "G": "6", "T": "7", "B": "8": "O": "0"}
+	for i in range(len(string)):
+		string[i] = reemplazo.get(string[i], string[i])
+	return string
+
 
 client.run(environ.get('DISCORD_TOKEN'))
