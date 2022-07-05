@@ -139,7 +139,7 @@ async def on_message(message):
 				await message.channel.send(content = message.author.mention + " ME NIEGO!!! ya verás el por qué\n" + "hihihihihihihihihihihyahyahyahhahhah!")
 		
 		if comando == "RepetirLeet":
-			await message,channel.send(content = "https://c.tenor.com/sz5PGIaFe0UAAAAC/terezi-terezipyrope.gif")
+			await message.channel.send(content = "https://c.tenor.com/sz5PGIaFe0UAAAAC/terezi-terezipyrope.gif")
 			await message.channel.send(content = message.author.mention + str_a_leet(argumento))
 
 		if comando == "anime":
