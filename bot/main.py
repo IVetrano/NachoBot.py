@@ -195,8 +195,8 @@ async def on_message(message):
 			voice = await channel.connect()
 
 			if not voice.is_playing():
-				with YoutubeDL(YDL_OPTIONS) as ydl:
-					info = ydl.extract_info(video_link, download=False)
+				#with YoutubeDL(YDL_OPTIONS) as ydl:
+				#	info = ydl.extract_info(video_link, download=False)
 				URL = "https://www.youtube.com/watch?v=RVLbhg-OPHY&ab_channel=NickCave%26TheBadSeeds-Topic"
 				voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
 				voice.is_playing()
