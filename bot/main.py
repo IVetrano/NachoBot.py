@@ -184,6 +184,14 @@ async def on_message(message):
 			await channel.connect()
 		if comando == "andate":
 			await message.voice_client.disconect()
+
+		if comando == "PeopleJustAintNoGood":
+			url = "https://www.youtube.com/watch?v=RVLbhg-OPHY&ab_channel=NickCave%26TheBadSeeds-Topic"
+			channel = message.author.voice.channel
+			vc = await client.join_voice_channel(voice_channel)
+			player = await vc.create_ytdl_player(url)
+			player.start()
+
 #-------------------------------------------------------------------------------
 
 #def hola():
