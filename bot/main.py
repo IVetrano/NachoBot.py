@@ -193,11 +193,12 @@ async def on_message(message):
 			FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 			channel = message.author.voice.channel
 			voice = await channel.connect()
+			url = "https://www.youtube.com/watch?v=RVLbhg-OPHY&ab_channel=NickCave%26TheBadSeeds-Topic"
 
 			if not voice.is_playing():
-				#with YoutubeDL(YDL_OPTIONS) as ydl:
-				#	info = ydl.extract_info(video_link, download=False)
-				URL = "https://www.youtube.com/watch?v=RVLbhg-OPHY&ab_channel=NickCave%26TheBadSeeds-Topic"
+				with YoutubeDL(YDL_OPTIONS) as ydl:
+					info = ydl.extract_info(url, download=False)
+				URL = info['formats'][0]['url']
 				voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
 				voice.is_playing()
 			else:
