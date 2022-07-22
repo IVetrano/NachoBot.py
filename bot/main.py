@@ -188,7 +188,7 @@ async def on_message(message):
 		if comando == "PeopleJustAintNoGood":
 			url = "https://www.youtube.com/watch?v=RVLbhg-OPHY&ab_channel=NickCave%26TheBadSeeds-Topic"
 			channel = message.author.voice.channel
-			vc = await client.join_voice_channel(voice_channel)
+			vc = await channel.connect()
 			player = await vc.create_ytdl_player(url)
 			player.start()
 
