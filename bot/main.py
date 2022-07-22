@@ -189,18 +189,18 @@ async def on_message(message):
 
 		if comando == "PeopleJustAintNoGood":
 			YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
-    		FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+			FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 			voice = get(client.voice_clients, guild=ctx.guild)
 
-    		if not voice.is_playing():
-      		    with YoutubeDL(ydl_opts) as ydl:
-            		info = ydl.extract_info(video_link, download=False)
-        		URL = "https://www.youtube.com/watch?v=RVLbhg-OPHY&ab_channel=NickCave%26TheBadSeeds-Topic"
-        		voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
-        		voice.is_playing()
-    		else:
-        		await ctx.send("Ya estoy reproduciendo govir!!")
-        		return
+			if not voice.is_playing():
+				with YoutubeDL(ydl_opts) as ydl:
+					info = ydl.extract_info(video_link, download=False)
+				URL = "https://www.youtube.com/watch?v=RVLbhg-OPHY&ab_channel=NickCave%26TheBadSeeds-Topic"
+				voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
+				voice.is_playing()
+			else:
+				await ctx.send("Ya estoy reproduciendo govir!!")
+				return
 
 #-------------------------------------------------------------------------------
 
