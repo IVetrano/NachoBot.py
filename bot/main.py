@@ -191,7 +191,8 @@ async def on_message(message):
 		if comando == "PeopleJustAintNoGood":
 			YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
 			FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
-			voice = get(client.voice_clients, guild=message.guild)
+			channel = message.author.voice.channel
+			voice = await channel.connect()
 
 			if not voice.is_playing():
 				with YoutubeDL(ydl_opts) as ydl:
