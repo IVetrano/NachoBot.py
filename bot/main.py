@@ -2,6 +2,7 @@ import discord
 import random
 import threading 
 import time
+import Textos_Voxeros.py as TV
 from os import environ
 from discord.ext import commands
 from discord import FFmpegPCMAudio
@@ -30,6 +31,11 @@ async def on_message(message):
 	
 	if message.author == client.user:
 		return
+
+	#Mensaje voxero
+	rand = random.randint(1, 10)
+	if rand == 1:
+		await message.channel.send(message.author.mention + " " + frase_voxera(), tts=True)
 	
 	if message.content.startswith(prefix):
 		
@@ -181,6 +187,8 @@ async def on_message(message):
 				embed.add_field(name="reaccion INSERTE AFIRMACION AQUÍ", value="Para que reaccione a lo que escribiste")
 				embed.add_field(name="equipos INSERTE NOMBRES DE PARTICIPANTES AQUÍ", value="Para que para que arme 2 equipos con los nombres escritos, DEBEN ESTAR SEPARADOS POR ESPACIOS")
 				await message.channel.send(content=None, embed=embed)
+
+		if comando == 
 				
 		if comando == "entra":
 			channel = message.author.voice.channel
@@ -240,6 +248,10 @@ def str_a_leet(string):
 		string[i] = reemplazo.get(string[i], string[i])
 	string = "".join(string)
 	return string
+
+def frase_voxera():
+	rand = random.randint(0, len(TV.Textos))
+	return TV.Textos[rand]
 
 
 client.run(environ.get('DISCORD_TOKEN'))
