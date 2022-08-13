@@ -248,7 +248,7 @@ def str_a_leet(string):
 	return string
 
 def frase_voxera():
-	rand = random.randint(0, len(Textos_Voxeros.Textos))
+	rand = random.randint(0, len(Textos_Voxeros.Textos) - 1)
 	return Textos_Voxeros.Textos[rand]
 
 
