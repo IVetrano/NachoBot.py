@@ -2,7 +2,7 @@ import discord
 import random
 import threading 
 import time
-import Textos_Voxeros.py
+import Textos_Voxeros
 from os import environ
 from discord.ext import commands
 from discord import FFmpegPCMAudio
