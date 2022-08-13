@@ -2,7 +2,7 @@ import discord
 import random
 import threading 
 import time
-import Textos_Voxeros.py as TV
+import Textos_Voxeros.py
 from os import environ
 from discord.ext import commands
 from discord import FFmpegPCMAudio
@@ -248,8 +248,8 @@ def str_a_leet(string):
 	return string
 
 def frase_voxera():
-	rand = random.randint(0, len(TV.Textos))
-	return TV.Textos[rand]
+	rand = random.randint(0, len(Textos_Voxeros.Textos))
+	return Textos_Voxeros.Textos[rand]
 
 
 client.run(environ.get('DISCORD_TOKEN'))
