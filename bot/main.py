@@ -188,8 +188,6 @@ async def on_message(message):
 				embed.add_field(name="equipos INSERTE NOMBRES DE PARTICIPANTES AQUÍ", value="Para que para que arme 2 equipos con los nombres escritos, DEBEN ESTAR SEPARADOS POR ESPACIOS")
 				await message.channel.send(content=None, embed=embed)
 
-		if comando == 
-				
 		if comando == "entra":
 			channel = message.author.voice.channel
 			await channel.connect()
