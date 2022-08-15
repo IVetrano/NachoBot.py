@@ -33,7 +33,7 @@ async def on_message(message):
 		return
 
 	#Mensaje voxero
-	rand = random.randint(1, 10)
+	rand = random.randint(1, 100)
 	if rand == 1:
 		await message.channel.send(message.author.mention + " " + frase_voxera(), tts=True)
 	
