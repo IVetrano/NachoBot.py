@@ -1,17 +1,30 @@
 import discord
 import random
-import threading 
-import time
-import Textos_Voxeros
-from os import environ
-from discord.ext import commands
-from discord import FFmpegPCMAudio
-from youtube_dl import YoutubeDL
-from discord.utils import get
+import asyncio
+from dotenv import load_dotenv
+import os
+import textos
 
-#------------------------------------------------------------ Inicializo el bot 
-prefix = 'NachoBot '
-client = discord.Client()
+NO_LOLEROS = [	641803467425447946,		# NachoNoGuide
+				627391601831837696,		# Falcon
+				565345833063809054,		# Gallardo
+				215246995324010496,		# Macco
+				410944349589864448,		# Idoboga
+				396025475123773450,		# Toumas
+				199290456461410315,		# Acosta
+				574413933528612884		# Julian
+			]
+
+#------------------------------------------------------------ Inicializo el bot
+load_dotenv()
+TOKEN = os.getenv("DISCORD_TOKEN")
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
+
+prefix = "NachoBot "
 
 @client.event
 async def on_ready():
@@ -32,11 +45,28 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 
-	#Mensaje voxero
-	rand = random.randint(1, 10000)
-	if rand == 1:
-		await message.channel.send(message.author.mention + " " + frase_voxera(), tts=True)
-	
+	# Expulsar temporalmente no loleros chistositos
+	if message.role_mentions and message.author.id in NO_LOLEROS:
+		roles_mencionados = [role.name for role in message.role_mentions]
+		if "Loleros" in roles_mencionados:
+			guild = message.guild
+			try:
+				await message.author.send(textos.frase_ban() + " 5 minutos de recreillo")
+				await guild.kick(message.author, reason="Menciono un rol prohibido")
+				await message.channel.send(f"{message.author.mention} \n {textos.frase_voxera()} \n En 5 minutos volves")
+
+				# Esperar 5 minutos
+				await asyncio.sleep(300)
+
+				# Crear una nueva invitación y enviarla por DM
+				invite = await guild.text_channels[0].create_invite(max_uses=1, unique=True)
+				await message.author.send(f"Te dimos un recreíllo y ya estás de vuelta. Que sea sin bromitas esta vez, ¿sí, chistosillo? \n {invite.url}")
+			
+			except discord.Forbidden:
+				await message.channel.send("No tengo permisos para expulsar a este usuario.")
+			except discord.HTTPException:
+				await message.channel.send("Hubo un error al intentar expulsarlo.")
+
 	if message.content.startswith(prefix):
 		
 		comando = message.content.split()[1]                          #Encuentro el comando
@@ -46,13 +76,13 @@ async def on_message(message):
 		argumento = message.content[indice_comando + len(comando):]   #Argumento es el mensaje desde que termino el comando hasta el finale
 
 		if comando == "hola":
-			await message.channel.send("Hola " + message.author.mention + ", todo cheto?", tts=True)
+			await message.channel.send("Hola " + message.author.mention + ", todo cheto?")
 			
 		if comando == "chau":
-			await message.channel.send("Nos vemos " + message.author.mention + "!", tts=True)
+			await message.channel.send("Nos vemos " + message.author.mention + "!")
 				
 		if comando == "decir":
-			await message.channel.send(argumento, tts=True)
+			await message.channel.send(argumento)
 					
 					
 		if comando == "rollear":
@@ -65,13 +95,13 @@ async def on_message(message):
 			respuestas = ["Sí", "No", "Tal vez", "No sé", "Definitivamente", " Claro "," sisi "," nono "," Por supuesto! ","No sé"," Por supuesto que no ","Desde ya que si","Desde ya que no"]
 			respuesta = respuestas[random.randint(-1, len(respuestas) - 1)]
 			embed = discord.Embed(description=respuesta)
-			await message.channel.send(content = message.author.mention + " a lo que me dijo '" + argumento + "' mi respuesta es " + respuesta, embed=embed, tts=True)
+			await message.channel.send(content = message.author.mention + " a lo que me dijo '" + argumento + "' mi respuesta es " + respuesta, embed=embed)
 			
 		if comando == "reaccion":
 			respuestas = ["¿Por qué?","XD", "Vamoo", "Como en Dark Souls!", "Eso es una referencia a Homestuck", "lol","que govir", "XD", "este esta ranciovich", "Domado"]
 			respuesta = respuestas[random.randint(-1, len(respuestas) - 1)]
 			embed = discord.Embed(description=respuesta)
-			await message.channel.send(content = message.author.mention + " a lo que me dijo '" + argumento + "' mi reaccion es " + respuesta, embed=embed, tts=True)
+			await message.channel.send(content = message.author.mention + " a lo que me dijo '" + argumento + "' mi reaccion es " + respuesta, embed=embed)
 		
 		if comando == "equipos":
 			cantidad = len(argumento.split())
@@ -98,7 +128,7 @@ async def on_message(message):
 			embed.add_field(name="Buenardovich", value=equipo1)
 			embed.add_field(name="VS", value="vs")
 			embed.add_field(name="Picantovic", value=equipo2)
-			await message.channel.send(content= message.author.mention + " acá tenés ranciovich", embed=embed, tts=True)
+			await message.channel.send(content= message.author.mention + " acá tenés ranciovich", embed=embed)
 				
 		if comando == "dab":
 			await message.channel.send("https://cdn.glitch.com/6353980a-f25a-4fd8-ab49-da62c9504e1d%2F2962cbec-5cdd-47ec-98de-0bf666b698fc_DAB.png?v=1601669406341")
@@ -164,16 +194,16 @@ async def on_message(message):
 			await message.channel.send("https://www.youtube.com/watch?v=_-agl0pOQfs")
 			
 		if comando == "me" and argumento == " rindo":
-			await message.channel.send("Te fuiste domado", tts=True)
+			await message.channel.send("Te fuiste domado")
 		
 		if comando == "entragovir":
 			canal = message.author.voice.channel
 			await canal.connect()
-			await message.channel.send(message.author.mention + " ya entre al chat de voz", tts=True)
+			await message.channel.send(message.author.mention + " ya entre al chat de voz")
 		
 		if comando == "andate":
 			await client.user.voice_channel.disconnect()
-			await message.channel.send(message.author.mention + " Bue loco", tts=True)
+			await message.channel.send(message.author.mention + " Bue loco")
 		
 		if comando == "jefe" and argumento == " maestro":
 			await message.channel.send("Jefe Maestro, ¿Pero qué haces?, ¿que haces con la mano? ¿Que te ha dado? Que te crees ahora un gato o un animal o algo por el estilo, no me digas que te has vuelto trolo.", tts=True)
@@ -247,9 +277,5 @@ def str_a_leet(string):
 	string = "".join(string)
 	return string
 
-def frase_voxera():
-	rand = random.randint(0, len(Textos_Voxeros.Textos) - 1)
-	return Textos_Voxeros.Textos[rand]
 
-
-client.run(environ.get('DISCORD_TOKEN'))
+client.run(TOKEN)
